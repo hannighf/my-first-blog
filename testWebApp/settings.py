@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-5@t=eum8@m6#s81a@%rwsvgyqf0a8ha@fli25@23%0e!pzwqs='
+# SECRET_KEY = 'django-insecure-5@t=eum8@m6#s81a@%rwsvgyqf0a8ha@fli25@23%0e!pzwqs='
+SECRET_KEY = 'nmjr4znkn&l&ri=2gt4m2v2f$lx0)-rxmub1_3k^e33g2-ioh&'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -129,3 +132,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+if 'DYNO' in os.environ:
+    django_heroku.settings(locals())
+
