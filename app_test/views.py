@@ -1,5 +1,7 @@
 from django.views.generic.base import TemplateView
 from django.shortcuts import render
+from django.utils import timezone
+from .models import Post
 
 
 class AppViewIdx(TemplateView):
@@ -18,4 +20,9 @@ class AppViewPage01(TemplateView):
         return context
 
 def post_list(request):
-    return render(request, 'app_test/post_list.html', {})
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    return render(request, 'app_test/post_list.html', {'posts': posts})
+
+
+
+
